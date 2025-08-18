@@ -1,18 +1,18 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"os"
+	"time"
 
 	"github.com/spf13/cobra"
 )
 
+const TimeFormat = time.RFC3339
+const CSVFilename = "tasks.csv"
 
-
-// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "todo",
 	Short: "A simple todo cli application",

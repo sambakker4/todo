@@ -11,9 +11,9 @@ import (
 )
 
 func Add(task string) {
-	file, err := os.OpenFile("tasks.csv", os.O_RDWR|os.O_CREATE, 0644)
+	file, err := os.OpenFile(CSVFilename, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
-		fmt.Println("tasks.csv failed to open")
+		fmt.Println("csv file failed to open")
 		return
 	}
 	defer file.Close()
@@ -36,7 +36,7 @@ func Add(task string) {
 	isComplete := "false"
 
 	writer := csv.NewWriter(file)
-	err = writer.Write([]string{strconv.FormatInt(id, 10), task, timeStamp.Format(time.RFC3339), isComplete})
+	err = writer.Write([]string{strconv.FormatInt(id, 10), task, timeStamp.Format(TimeFormat), isComplete})
 	if err != nil {
 		fmt.Printf("error writing to tasks.csv: %s", err.Error())
 		return
