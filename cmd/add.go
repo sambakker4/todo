@@ -38,7 +38,7 @@ func Add(task string) {
 	writer := csv.NewWriter(file)
 	err = writer.Write([]string{strconv.FormatInt(id, 10), task, timeStamp.Format(TimeFormat), isComplete})
 	if err != nil {
-		fmt.Printf("error writing to tasks.csv: %s", err.Error())
+		fmt.Printf("error writing to tasks.csv: %s\n", err.Error())
 		return
 	}
 
@@ -47,7 +47,7 @@ func Add(task string) {
 
 var addCmd = &cobra.Command{
 	Use:     "add",
-	Aliases: []string{"add"},
+	Aliases: []string{"add", "a"},
 	Short:   "adds a task",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

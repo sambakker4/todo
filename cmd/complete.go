@@ -68,7 +68,7 @@ func findRowByID(csvData [][]string, id int) (int, error) {
 
 var completeCmd = &cobra.Command{
 	Use:     "complete",
-	Aliases: []string{"complete"},
+	Aliases: []string{"complete", "c"},
 	Short:   "completes a task",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

@@ -49,7 +49,7 @@ func List() {
 			if j == 2 && i != 0 {
 				time, err := time.Parse(TimeFormat, item)
 				if err != nil {
-					fmt.Printf("error parsing time in csv %s", err.Error())
+					fmt.Printf("error parsing time in csv %s\n", err.Error())
 					return
 				}
 				currentLine += timediff.TimeDiff(time) + "\t"
@@ -73,7 +73,7 @@ func List() {
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Aliases: []string{"list"},
+	Aliases: []string{"list", "l"},
 	Short:   "lists all todos",
 	Args:    cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {

@@ -61,4 +61,5 @@ func init() {
 		fmt.Printf("error creating tasks.csv on startup: %s\n", err.Error())
 		return
 	}
+	writer.Flush()
 }
