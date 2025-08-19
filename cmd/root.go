@@ -4,6 +4,8 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"encoding/csv"
+	"fmt"
 	"os"
 	"time"
 
@@ -16,7 +18,7 @@ const CSVFilename = "tasks.csv"
 var rootCmd = &cobra.Command{
 	Use:   "todo",
 	Short: "A simple todo cli application",
-	Long: `todo is an simple CLI application that stores your things you want to do`,
+	Long:  `todo is an simple CLI application that stores your things you want to do`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -40,4 +42,23 @@ func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
+func init() {
+	_, err := os.Stat(CSVFilename)
+	if err == nil {
+		return
+	}
 
+	file, err := os.Create(CSVFilename)
+	if err != nil {
+		fmt.Printf("error creating tasks.csv on startup: %s\n", err.Error())
+		return
+	}
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	err = writer.Write([]string{"ID", "Description", "Created At", "Is Complete"})
+	if err != nil {
+		fmt.Printf("error creating tasks.csv on startup: %s\n", err.Error())
+		return
+	}
+}
